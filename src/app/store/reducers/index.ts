@@ -1,4 +1,5 @@
 import { ActionReducerMap } from '@ngrx/store';
+import { AppState } from '@app/types';
 
 import * as admin from './admin.reducer';
 import * as main from './main.reducer';

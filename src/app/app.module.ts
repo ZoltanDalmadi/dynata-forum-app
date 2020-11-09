@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -27,6 +31,8 @@ import { effects, reducerMap } from './store';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     StoreModule.forRoot(reducerMap),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
