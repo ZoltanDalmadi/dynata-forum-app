@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
+  getAllRoles,
   getAllUsers,
+  gotAllRoles,
   gotAllUsers,
 } from 'src/app/store/actions/profile.actions';
 
@@ -15,6 +17,15 @@ export class ProfileEffects {
       ofType(getAllUsers),
       switchMap(() =>
         this.apiService.allUsers().pipe(map(users => gotAllUsers({ users })))
+      )
+    )
+  );
+
+  getAllRoles$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getAllRoles),
+      switchMap(() =>
+        this.apiService.allRoles().pipe(map(roles => gotAllRoles({ roles })))
       )
     )
   );

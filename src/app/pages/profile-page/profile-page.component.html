@@ -14,8 +14,36 @@
     </div>
 
     <div class="form-group">
-      <label>Last Name:</label>
+      <label>Email:</label>
       <input class="form-control" type="text" formControlName="email" />
     </div>
   </form>
+
+  <ng-container *ngIf="allRoles$ | async as allRoles">
+    <ng-container *ngIf="currentUser$ | async as currentUser">
+      <ng-container *ngIf="getRole(currentUser, allRoles) as role">
+        {{ role.name }}
+        <h2>
+          <span [class]="getBadgeClass(0, role)" class="badge">
+            Read Comments
+          </span>
+        </h2>
+        <h2>
+          <span [class]="getBadgeClass(1, role)" class="badge">
+            Add / Remove Comments
+          </span>
+        </h2>
+        <h2>
+          <span [class]="getBadgeClass(2, role)" class="badge">
+            Add / Remove Topics
+          </span>
+        </h2>
+        <h2>
+          <span [class]="getBadgeClass(3, role)" class="badge">
+            Remove other's topics and comments
+          </span>
+        </h2>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </div>
