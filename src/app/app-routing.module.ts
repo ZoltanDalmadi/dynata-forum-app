@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminPageComponent, ProfilePageComponent } from 'src/app/pages';
+import {
+  AdminPageComponent,
+  MainPageComponent,
+  ProfilePageComponent,
+} from 'src/app/pages';
 
 const routes: Routes = [
-  { path: '', component: ProfilePageComponent },
+  { path: '', component: MainPageComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'profile', component: ProfilePageComponent },
 ];
