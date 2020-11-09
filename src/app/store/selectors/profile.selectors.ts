@@ -10,3 +10,13 @@ export const currentUser = createSelector(
   selectProfile,
   state => state.currentUser
 );
+
+export const noOfTopics = createSelector(
+  selectProfile,
+  ({ currentUser, topics }) => {
+    if (currentUser && topics.length > 0) {
+      const userId = currentUser.id;
+      return topics.filter(topic => topic.author.id === userId).length;
+    }
+  }
+);

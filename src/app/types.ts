@@ -48,6 +48,7 @@ export interface ProfileState {
   users: User[];
   currentUser: User;
   roles: RoleObject[];
+  topics: Topic[];
 }
 
 export interface RoleObject {
@@ -58,6 +59,10 @@ export interface RoleObject {
 
 export interface RoleResponse extends BaseResponse {
   data: RoleObject[];
+}
+
+export interface TopicsResponse extends BaseResponse {
+  data: Topic[];
 }
 
 export interface MainState {}

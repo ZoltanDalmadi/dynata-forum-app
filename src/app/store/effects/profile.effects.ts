@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   getAllRoles,
+  getAllTopics,
   getAllUsers,
   gotAllRoles,
+  gotAllTopics,
   gotAllUsers,
-} from 'src/app/store/actions/profile.actions';
+  updateUser,
+  updateUserFailure,
+  updateUserSuccess,
+} from '@store/actions';
 
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
+import { of } from 'rxjs';
 
 @Injectable()
 export class ProfileEffects {
@@ -28,6 +34,33 @@ export class ProfileEffects {
         this.apiService.allRoles().pipe(map(roles => gotAllRoles({ roles })))
       )
     )
+  );
+
+  getAllTopics$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getAllTopics),
+      switchMap(() =>
+        this.apiService
+          .allTopics()
+          .pipe(map(topics => gotAllTopics({ topics })))
+      )
+    )
+  );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUser),
+      switchMap(userData =>
+        this.apiService.updateUser(userData).pipe(
+          map(updateUserSuccess),
+          catchError(error => of(updateUserFailure({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  updateUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(ofType(updateUser), map(getAllUsers))
   );
 
   constructor(private actions$: Actions, private apiService: ApiService) {}

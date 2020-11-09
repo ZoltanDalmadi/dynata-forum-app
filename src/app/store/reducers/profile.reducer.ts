@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import {
   gotAllRoles,
+  gotAllTopics,
   gotAllUsers,
   selectUser,
 } from 'src/app/store/actions/profile.actions';
@@ -10,6 +11,7 @@ export const initialState: ProfileState = {
   users: [],
   currentUser: null,
   roles: [],
+  topics: [],
 };
 
 export const reducer = createReducer<ProfileState>(
@@ -26,5 +28,9 @@ export const reducer = createReducer<ProfileState>(
   on(gotAllRoles, (state, { roles }) => ({
     ...state,
     roles,
+  })),
+  on(gotAllTopics, (state, { topics }) => ({
+    ...state,
+    topics,
   }))
 );
